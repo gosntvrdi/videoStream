@@ -1,5 +1,5 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
-from videoPlayerPlaylist import playlist
+from videoPlaylist import playlist
 from player import playerVLC
 from OBS import obsSceneVLC
 
