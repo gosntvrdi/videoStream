@@ -8,4 +8,5 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update ;\
     apt-get install -y tzdata
 RUN apt-get install -y vlc
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 # CMD python ./videoScheduler.py
