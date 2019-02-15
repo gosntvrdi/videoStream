@@ -25,6 +25,6 @@ def playerVLC():
                 obsSceneTransition()
                 play = False
 
-
+playerVLC()
 
 
