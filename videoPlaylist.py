@@ -9,8 +9,8 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 conn = mariadb.connect(host='192.168.150.251', user='videostream', password='mirko', database='songsDB')
 cursor = conn.cursor(buffered=True)
 
-morning = 'video/morning'
-day = 'video/day'
+morning = 'app/video/morning'
+day = 'app/video/day'
 
 
 def deleteVideoFiles(folder):
@@ -33,7 +33,7 @@ def dayClock():
     currentPath = (os.path.relpath(cwd))
     os.chdir(day)
     for x in data:
-        os.chdir(dirname)
+        os.chdir('/app')
         song = x[0]
         attribute = x[1]
         fileLocation = x[2]
@@ -58,7 +58,7 @@ def morningClock():
     currentPath = (os.path.relpath(cwd))
     os.chdir(morning)
     for x in data:
-        os.chdir(dirname)
+        os.chdir('/app')
         song = x[0]
         attribute = x[1]
         fileLocation = x[2]
@@ -75,7 +75,7 @@ def morningClock():
                 pass
 
 def deletePlaylist():
-    os.chdir(dirname)
+    os.chdir('/app')
     open('playlist.pls', 'w').close()
 
 
