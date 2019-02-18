@@ -2,4 +2,4 @@
 
 
 python ./app.py
-python ./videoScheduler.py
+python ./videoPlaylist.py
