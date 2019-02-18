@@ -10,4 +10,4 @@ RUN apt-get install -y tzdata
 EXPOSE 4444
 EXPOSE 5000
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
