@@ -7,6 +7,4 @@ ENV TZ=Europe/Amsterdam
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
 RUN apt-get install -y tzdata
-EXPOSE 5000
 RUN chmod +x videoScheduler.sh
-
