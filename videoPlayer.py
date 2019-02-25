@@ -4,7 +4,7 @@ from OBS import obsSceneTransition, obsSceneVLC
 
 
 def playerVLC():
-    playlist = 'playlist.pls'
+    playlist = '/app/playlist.pls'
     with open(playlist, 'r') as f:
         playlist=[i for line in f for i in line.split(',')]
         playlist = map(lambda s: s.strip(), playlist)
