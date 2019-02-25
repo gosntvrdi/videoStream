@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo apt-get install wmctrl
-sleep 40
+sleep 10
 wmctrl -k on
