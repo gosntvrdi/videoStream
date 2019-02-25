@@ -2,5 +2,5 @@
 sudo apt install python-pip
 cd /app
 pip install -r requirements.txt
-python videoPlayer.py
+python videoPlayer.py &
 python videoPlaylist.py
