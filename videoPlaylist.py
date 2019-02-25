@@ -86,7 +86,7 @@ def playlistPrepareForVLC():
         lines = fp.read().splitlines()
     with open('playlist.pls', "w") as fp:
         for line in lines:
-            print(dirname + line, file=fp)
+            print('/app' + line, file=fp)
 
 
 def playlist():
