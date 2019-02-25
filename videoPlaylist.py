@@ -10,8 +10,8 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 conn = mariadb.connect(host='192.168.150.251', user='videostream', password='mirko', database='songsDB')
 cursor = conn.cursor(buffered=True)
 
-morning = 'app/video/morning'
-day = 'app/video/day'
+morning = '/app/video/morning'
+day = '/app/video/day'
 
 
 def deleteVideoFiles(folder):
@@ -99,9 +99,9 @@ def playlist():
     playlistPrepareForVLC()
 
 
-# scheduler = BlockingScheduler()
-# scheduler.add_job(obsSceneVLC, trigger='cron', hour='03', minute='00')
-# scheduler.add_job(playlist, trigger='cron', hour='03', minute='10')
-# scheduler.start()
+scheduler = BlockingScheduler()
+scheduler.add_job(obsSceneVLC, trigger='cron', hour='03', minute='00')
+scheduler.add_job(playlist, trigger='cron', hour='03', minute='10')
+scheduler.start()
 
-playlist()
+
