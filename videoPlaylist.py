@@ -81,7 +81,7 @@ def deletePlaylist():
 
 
 def playlistPrepareForVLC():
-    os.chdir(dirname)
+    os.chdir('/app')
     with open('playlist.pls') as fp:
         lines = fp.read().splitlines()
     with open('playlist.pls', "w") as fp:
