@@ -9,5 +9,5 @@ RUN apt-get update
 RUN apt-get install -y tzdata
 ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /app
-RUN chmod +x videoScheduler.sh
+RUN chmod +x /app/videoScheduler.sh
 CMD python ./app.py
