@@ -9,4 +9,5 @@ RUN apt-get update
 RUN apt-get install -y tzdata
 RUN ["chmod", "+x", "/tmp/entrypoint.sh"]
 ENTRYPOINT ["/tmp/entrypoint.sh"] 
-CMD python ./app.py
+#CMD python ./app.py
+ENTRYPOINT ["tail", "-f", "/dev/null"]
