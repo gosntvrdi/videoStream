@@ -1,2 +1,3 @@
 #!/bin/bash
-cp -a /tmp/* /app/
+docker run --name=videostream -v /app:/app -i -t  gosntvrdi/videostream
+docker cp videostream:/tmp/. /app

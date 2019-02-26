@@ -5,7 +5,8 @@ sudo apt-get install xdotool
 cd /app
 pip install -r requirements.txt
 python videoPlayer.py &
-python videoPlaylist.py
+python videoPlaylist.py &
+python app.py
 sleep 3
 wmctrl -k on
 sleep 10
