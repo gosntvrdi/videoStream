@@ -9,5 +9,5 @@ RUN apt-get update
 RUN apt-get install -y tzdata
 COPY /tmp /app
 WORKDIR /app
-RUN chmod +x /app/videoScheduler.sh
+RUN chmod +x videoScheduler.sh
 CMD python ./app.py
