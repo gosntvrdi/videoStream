@@ -2,7 +2,7 @@ import mysql.connector as mariadb
 import ftplib
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
-#from OBS import obsSceneVLC
+from OBS import obsSceneVLC
 
 dirname = os.path.dirname(__file__)
 my_path = os.path.abspath(os.path.dirname(__file__))
