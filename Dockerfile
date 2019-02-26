@@ -7,7 +7,7 @@ ENV TZ=Europe/Amsterdam
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
 RUN apt-get install -y tzdata
-ENTRYPOINT ["/entrypoint.sh"]
+COPY /tmp /app
 WORKDIR /app
 RUN chmod +x /app/videoScheduler.sh
 CMD python ./app.py
