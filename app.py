@@ -9,7 +9,10 @@ from werkzeug import secure_filename
 from lib.upload_file import uploadfile
 from OBS import obsSceneTransition, obsSceneVLC
 from videoCec import cecInputTV, cecInputNuc
+import subprocess
 
+
+subprocess.call(['/tmp/entrypoint.sh'])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
