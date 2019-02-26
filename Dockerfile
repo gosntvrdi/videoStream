@@ -7,6 +7,6 @@ ENV TZ=Europe/Amsterdam
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
 RUN apt-get install -y tzdata
-RUN [“chmod”, “+x”, "/tmp/entrypoint.sh”]
+RUN ["chmod", "+x", "/tmp/entrypoint.sh"]
 ENTRYPOINT ["/tmp/entrypoint.sh"] 
 CMD python ./app.py
