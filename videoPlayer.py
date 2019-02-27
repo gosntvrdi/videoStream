@@ -4,7 +4,7 @@ import time
 
 def playerVLC():
     proces = subprocess.Popen(['obs'])
-    proc.communicate()
+    proc
     from OBS import obsSceneTransition, obsSceneVLC
     playlist = '/app/playlist.pls'
     with open(playlist, 'r') as f:
