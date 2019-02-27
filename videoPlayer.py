@@ -1,9 +1,11 @@
 import vlc
 import time
-from OBS import obsSceneTransition, obsSceneVLC
 
 
 def playerVLC():
+    proces = subprocess.Popen(['obs'])
+    proc.communicate()
+    from OBS import obsSceneTransition, obsSceneVLC
     playlist = '/app/playlist.pls'
     with open(playlist, 'r') as f:
         playlist=[i for line in f for i in line.split(',')]
