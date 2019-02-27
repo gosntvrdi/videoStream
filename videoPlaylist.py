@@ -3,6 +3,10 @@ import ftplib
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
 from OBS import obsSceneVLC
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 dirname = os.path.dirname(__file__)
 my_path = os.path.abspath(os.path.dirname(__file__))
