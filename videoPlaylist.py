@@ -37,7 +37,7 @@ def dayClock():
         os.chdir('/app')
         song = x[0]
         attribute = x[1]
-        fileLocation = x[2]
+        fileLocation = ('/app' + x[2])
         print(song + ", '" + attribute + "'" + ', ' + fileLocation)
         with open('playlist.pls', 'a') as playlist:
             playlist.write(fileLocation + '\n')
@@ -62,7 +62,7 @@ def morningClock():
         os.chdir('/app')
         song = x[0]
         attribute = x[1]
-        fileLocation = x[2]
+        fileLocation = ('/app' + x[2])
         print(song + ", '" + attribute + "'" + ', ' + fileLocation)
         with open('playlist.pls', 'a') as playlist:
             playlist.write(fileLocation + '\n')
@@ -80,15 +80,6 @@ def deletePlaylist():
     open('playlist.pls', 'w').close()
 
 
-def playlistPrepareForVLC():
-    os.chdir('/app')
-    with open('playlist.pls') as fp:
-        lines = fp.read().splitlines()
-    with open('playlist.pls', "w") as fp:
-        for line in lines:
-            print('/app' + line, file=fp)
-
-
 def playlist():
     deletePlaylist()
     deleteVideoFiles(morning)
@@ -96,7 +87,6 @@ def playlist():
     morningClock()
     for _ in range(50):
         dayClock()
-    playlistPrepareForVLC()
 
 
 scheduler = BlockingScheduler()
