@@ -6,7 +6,7 @@ def playerVLC():
     proces = subprocess.Popen(['obs'])
     proc
     from OBS import obsSceneTransition, obsSceneVLC
-    playlist = '/app/playlist.pls'
+    playlist = '/playlist.pls'
     with open(playlist, 'r') as f:
         playlist=[i for line in f for i in line.split(',')]
         playlist = map(lambda s: s.strip(), playlist)
