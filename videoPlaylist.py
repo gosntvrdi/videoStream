@@ -1,8 +1,8 @@
 import mysql.connector as mariadb
 import ftplib
 import os
-from apscheduler.schedulers.blocking import BlockingScheduler
-from OBS import obsSceneVLC
+#from apscheduler.schedulers.blocking import BlockingScheduler
+#from OBS import obsSceneVLC
 import sys
 
 #reload(sys)
@@ -29,7 +29,7 @@ def deleteVideoFiles(folder):
 
 
 def dayClock():
-    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'day' ORDER BY RAND() LIMIT 240")
+    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'day' ORDER BY RAND() LIMIT 3")
     data = cursor.fetchall()
     ftp = ftplib.FTP('192.168.150.251', 'videostream', 'yammatFM102.5')
     ftp.cwd('/04-PUBLIC/LUKA/videoplayer/video/day')
@@ -55,7 +55,7 @@ def dayClock():
                 pass
 
 def morningClock():
-    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'morning' ORDER BY RAND() LIMIT 120")
+    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'morning' ORDER BY RAND() LIMIT 3")
     data = cursor.fetchall()
     ftp = ftplib.FTP('192.168.150.251', 'videostream', 'yammatFM102.5')
     ftp.cwd('/04-PUBLIC/LUKA/videoplayer/video/morning')
@@ -81,7 +81,7 @@ def morningClock():
 
 
 def commercialsClock():
-    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'morning' ORDER BY RAND() LIMIT 120")
+    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'morning' ORDER BY RAND() LIMIT 3")
     data = cursor.fetchall()
     ftp = ftplib.FTP('192.168.150.251', 'videostream', 'yammatFM102.5')
     ftp.cwd('/04-PUBLIC/LUKA/videoplayer/video/morning')
@@ -94,7 +94,7 @@ def commercialsClock():
         attribute = x[1]
         fileLocation = (x[2])
         print(song + ", '" + attribute + "'" + ', ' + fileLocation)
-        with open('commercials.txt', 'a') as commercialsList:
+        with open('commercials.pls', 'a') as commercialsList:
             commercialsList.write(fileLocation + '\n')
             localFilename = os.path.join(currentPath + fileLocation)
             localFilename = (localFilename[1:])
@@ -107,47 +107,39 @@ def commercialsClock():
 
 
 def deletePlaylist():
-    #os.chdir('/app')
+    os.chdir(dirname)
     open('playlist.pls', 'w').close()
+    open('commercials.pls', 'w').close()
+    open('playlistWithCommercials.pls', 'w').close()
+
+
+def insertCommercials():
+    os.chdir(dirname)
+    playlistList = [word.strip('\n').split(',') for word in open("playlist.pls", 'r').readlines()]
+    commercialsList = [word.strip('\n').split(',') for word in open("commercials.pls", 'r').readlines()]
+    playlistWithCommercials = [x for y in (playlistList[i:i + 3] + commercialsList * (i < len(playlistList) - 2) for i in range(0, len(playlistList), 3)) for x in y]
+    print(playlistWithCommercials)
+    with open('playlistWithCommercials.pls', mode="w") as outfile:
+        for s in playlistWithCommercials:
+            for line in s:
+                outfile.write(str(line) + '\n')
+
+
 
 
 def playlist():
     deletePlaylist()
     deleteVideoFiles(morning)
     deleteVideoFiles(day)
+    deleteVideoFiles(commercials)
+    commercialsClock()
     morningClock()
-    for _ in range(50):
-        dayClock()
+    #for _ in range(50):
+        #dayClock()
+    dayClock()
+    insertCommercials()
 
-
-
-
-
-def insertCommercials():
-    with open("playlist.pls", "r+") as f2:
-
-        i = 0
-        for x in range(2):
-            f2.readline()  # skip past early lines
-        pos = f2.tell()  # remember insertion position
-        f2_remainder = f2.read()  # cache the rest of f2
-        f2.seek(pos)
-        with open("commercials.txt", "r") as f1:
-            f2.write(f1.read())
-        f2.write(f2_remainder)
-
-    # commercialsTxt = open('commercials.txt', 'r')
-    # lines = commercialsTxt.read().split('\n')
-    # print (lines)
-    # with open('commercials.txt', 'r') as prev_file, open(dirname + 'playlist.pls', 'w') as new_file:
-    #     prev_contents = prev_file.readlines()
-    #     # Now prev_contents is a list of strings and you may add the new line to this list at any position
-    #     prev_contents.insert(4, "\n This is a new line \n ")
-    #     new_file.write("\n".join(prev_contents))
-
-
-insertCommercials()
-#commercialsClock()
+playlist()
 
 # scheduler = BlockingScheduler()
 # scheduler.add_job(obsSceneVLC, trigger='cron', hour='03', minute='00')
