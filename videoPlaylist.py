@@ -81,7 +81,7 @@ def morningClock():
 
 
 def commercialsClock():
-    cursor.execute("SELECT songName, attribute, fileLocation FROM songsDBFileLocation WHERE attribute = 'morning' ORDER BY RAND() LIMIT 3")
+    cursor.execute("SELECT songName, attribute, fileLocation FROM commercialsDBFileLocation WHERE attribute = 'commercial' ORDER BY RAND() LIMIT 3")
     data = cursor.fetchall()
     ftp = ftplib.FTP('192.168.150.251', 'videostream', 'yammatFM102.5')
     ftp.cwd('/04-PUBLIC/LUKA/videoplayer/video/morning')
